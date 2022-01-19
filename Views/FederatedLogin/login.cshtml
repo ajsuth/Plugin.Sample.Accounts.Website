@@ -1,0 +1,26 @@
+﻿@using System.Web.Mvc;
+
+
+@{using (Html.BeginForm(null, null, FormMethod.Post, new { action = ViewBag.SignInUrl }))
+    {
+        <button type="submit">
+            Login
+        </button>
+    }
+}
+
+
+<div>
+    <p>@Sitecore.Security.Authentication.AuthenticationManager.GetActiveUser().LocalName</p>
+    <p>Is Authed: @Sitecore.Context.User.IsAuthenticated</p>
+    <p>Name: @Sitecore.Context.User.Name</p>
+    <p>Localname: @Sitecore.Context.User.LocalName</p>
+    <p>Domain: @Sitecore.Context.User.GetDomainName()</p>
+    <p>Profile Email: @Sitecore.Context.User.Profile.Email</p>
+    <pre>
+        @Newtonsoft.Json.JsonConvert.SerializeObject(Sitecore.Context.User, Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings
+  {
+      ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+  })
+    </pre>
+</div>
